@@ -1,8 +1,13 @@
 {
   "data": [
     {
-      "text": "This is cool",
-      "status": "uncompleted",
+      "status": true,
+      "text": "Todo",
+      "id": 1
+    },
+    {
+      "status": true,
+      "text": "Todo",
       "id": 2
     }
   ]

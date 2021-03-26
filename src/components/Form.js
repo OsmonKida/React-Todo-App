@@ -6,10 +6,12 @@ import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 const useStyles = makeStyles({
   btn: {
-    height: "2rem",
+    height: "100%",
+    borderRadius: "0 5px 5px 0",
   },
   textField: {
-    margin: "0 10px 10px 0",
+    height: "100%",
+    borderRadius: "5px 0 0 5px",
   },
   form: {
     display: "flex",
@@ -23,15 +25,14 @@ const useStyles = makeStyles({
   row: {
     width: "100%",
     display: "flex",
-    alignItems: "center",
-    justifyContent: "space-between",
+
     marginTop: "20px",
   },
 });
-const Form = ({ addTodo }) => {
+export const Form = ({ addTodo, status, setStatus }) => {
   const classes = useStyles();
   const [addText, setAddText] = useState("");
-  const [select, setSelect] = useState("All todos");
+
   return (
     <form className={classes.form}>
       <div className={classes.row}>
@@ -51,7 +52,7 @@ const Form = ({ addTodo }) => {
           endIcon={<SendIcon />}
           onClick={() => {
             if (addText !== "") {
-              const todo = { text: addText, status: "uncompleted" };
+              const todo = { status: true, text: addText };
               addTodo(todo);
               setAddText("");
             }
@@ -67,10 +68,12 @@ const Form = ({ addTodo }) => {
       >
         <Select
           className={classes.select}
-          value={select}
-          onChange={(e) => setSelect(e.target.value)}
+          value={status}
+          onChange={(e) => {
+            setStatus(e.target.value);
+          }}
         >
-          <MenuItem value={"All todos"}>All todos</MenuItem>
+          <MenuItem value={"All"}>All</MenuItem>
           <MenuItem value={"Completed"}>Completed</MenuItem>
           <MenuItem value={"Uncompleted"}>Uncompleted</MenuItem>
         </Select>
@@ -78,5 +81,4 @@ const Form = ({ addTodo }) => {
     </form>
   );
 };
-
 export default Form;

@@ -1,17 +1,30 @@
 import React from "react";
 import Todo from "./Todo";
-const TodoList = ({ deleteTodo, todos }) => {
+import styled from "styled-components";
+const TodoList = ({ deleteTodo, todos, toggleStatus, filteredTodos }) => {
   return (
-    <div className="list-wrapper">
-      {todos.map((todo) => {
+    <ListWrapper>
+      {filteredTodos.map((todo) => {
         return (
-          <div key={todo.id}>
-            <Todo {...todo} deleteTodo={deleteTodo} />
-          </div>
+          <ListItem key={todo.id}>
+            <Todo
+              {...todo}
+              deleteTodo={deleteTodo}
+              toggleStatus={toggleStatus}
+            />
+          </ListItem>
         );
       })}
-    </div>
+    </ListWrapper>
   );
 };
 
 export default TodoList;
+const ListWrapper = styled.ul`
+  list-style-type: none;
+
+  padding: 20px 0;
+  background-color: white;
+  border-radius: 10px;
+`;
+const ListItem = styled.li``;
